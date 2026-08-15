@@ -1,11 +1,15 @@
 package org.AL.tutorial;
 
 import com.mojang.logging.LogUtils;
+import com.mojang.serialization.MapDecoder;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.AL.tutorial.init.ModBlocks;
+import org.AL.tutorial.init.ModCreativeModeTabs;
+import org.AL.tutorial.init.ModItems;
 import org.slf4j.Logger;
 
 @Mod(Tutorial.MODID)
@@ -19,8 +23,9 @@ public class Tutorial {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         //region ModEventBus
-
-
+        ModBlocks.register(modEventBus);
+        ModItems.register(modEventBus);
+        ModCreativeModeTabs.register(modEventBus);
         //end region
 
         modEventBus.addListener(this::commonSetup);
