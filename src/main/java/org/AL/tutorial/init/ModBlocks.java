@@ -1,5 +1,7 @@
 package org.AL.tutorial.init;
 
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -9,13 +11,29 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.AL.tutorial.Tutorial;
 
+import java.util.function.Supplier;
+
 public class ModBlocks {
     public static final DeferredRegister<Block> BLOCK =
             DeferredRegister.create(ForgeRegistries.BLOCKS, Tutorial.MODID);
 
     public static final RegistryObject<Block> RAW_MATERIAL_BLOCK =
-            BLOCK.register("raw_material_block",
+            blockRegister("raw_material_block",
                     () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+
+    public static <T extends Block> RegistryObject<T> blockRegister(String name, Supplier<T> block) {
+        RegistryObject<T> toReturn = BLOCK.register(name, block);
+
+        blockItemRegister(name, toReturn);
+
+        return toReturn;
+    }
+
+    public static <T extends Block> RegistryObject<Item> blockItemRegister(String name, RegistryObject<T> block) {
+        return ModItems.ITEM.register(name,
+                () -> new BlockItem(block.get(), new Item.Properties()));
+    }
+
 
     public static void register(IEventBus eventBus) {
         BLOCK.register(eventBus);
