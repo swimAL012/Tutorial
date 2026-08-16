@@ -10,6 +10,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.AL.tutorial.Tutorial;
+import org.AL.tutorial.block.machine.IndustrialProcessingUnitBlock;
 
 import java.util.function.Supplier;
 
@@ -20,6 +21,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> RAW_MATERIAL_BLOCK =
             blockRegister("raw_material_block",
                     () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+
+    public static final RegistryObject<Block> INDUSTRIAL_PROCESSING_UNIT =
+            blockRegister("industrial_processing_unit", IndustrialProcessingUnitBlock::new);
 
     public static <T extends Block> RegistryObject<T> blockRegister(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCK.register(name, block);

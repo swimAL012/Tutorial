@@ -1,5 +1,6 @@
 {
   "item.tutorial.raw_material": "原料",
   "block.tutorial.raw_material_block": "原料块",
+  "block.tutorial.industrial_processing_unit": "工业加工原件",
   "tab.tutorial": "教程"
 }

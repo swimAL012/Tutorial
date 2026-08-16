@@ -23,6 +23,7 @@ public class ModCreativeModeTabs {
                             .displayItems((itemDisplayParameters, output) -> {
                                 output.accept(ModItems.RAW_MATERIAL.get());
                                 output.accept(ModBlocks.RAW_MATERIAL_BLOCK.get());
+                                output.accept(ModBlocks.INDUSTRIAL_PROCESSING_UNIT.get());
                             })
                             .build()
             );
