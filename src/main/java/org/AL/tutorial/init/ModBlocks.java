@@ -15,7 +15,7 @@ import org.AL.tutorial.block.machine.IndustrialProcessingUnitBlock;
 import java.util.function.Supplier;
 
 public class ModBlocks {
-    public static final DeferredRegister<Block> BLOCK =
+    public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, Tutorial.MODID);
 
     public static final RegistryObject<Block> RAW_MATERIAL_BLOCK =
@@ -26,7 +26,7 @@ public class ModBlocks {
             blockRegister("industrial_processing_unit", IndustrialProcessingUnitBlock::new);
 
     public static <T extends Block> RegistryObject<T> blockRegister(String name, Supplier<T> block) {
-        RegistryObject<T> toReturn = BLOCK.register(name, block);
+        RegistryObject<T> toReturn = BLOCKS.register(name, block);
 
         blockItemRegister(name, toReturn);
 
@@ -34,13 +34,13 @@ public class ModBlocks {
     }
 
     public static <T extends Block> RegistryObject<Item> blockItemRegister(String name, RegistryObject<T> block) {
-        return ModItems.ITEM.register(name,
+        return ModItems.ITEMS.register(name,
                 () -> new BlockItem(block.get(), new Item.Properties()));
     }
 
 
     public static void register(IEventBus eventBus) {
-        BLOCK.register(eventBus);
+        BLOCKS.register(eventBus);
     }
 
 }

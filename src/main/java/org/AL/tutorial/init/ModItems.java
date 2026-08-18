@@ -12,23 +12,23 @@ import java.util.function.Function;
 
 public class ModItems {
 
-    public static final DeferredRegister<Item> ITEM =
+    public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, Tutorial.MODID);
 
     public static final RegistryObject<Item> RAW_MATERIAL =
             registerItem("raw_material");
 
     private static RegistryObject<Item> registerItem(String name) {
-        return ITEM.register(name, () -> new Item(new Item.Properties()));
+        return ITEMS.register(name, () -> new Item(new Item.Properties()));
     }
 
     private static RegistryObject<Item> registerItem(String name, Function<Item.Properties, Item> factory) {
-        return ITEM.register(name,
+        return ITEMS.register(name,
                 () -> factory.apply(new Item.Properties()));
     }
 
     private static RegistryObject<Item> registerItem(String name, Consumer<Item.Properties> propertiesModifier) {
-        return ITEM.register(name,
+        return ITEMS.register(name,
                 () -> {
                     Item.Properties props = new Item.Properties();
                     propertiesModifier.accept(props);
@@ -37,7 +37,7 @@ public class ModItems {
     }
 
     public static void register(IEventBus eventBus) {
-        ITEM.register(eventBus);
+        ITEMS.register(eventBus);
     }
 
 }
