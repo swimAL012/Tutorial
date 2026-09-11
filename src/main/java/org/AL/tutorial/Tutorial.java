@@ -6,10 +6,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.AL.tutorial.init.ModBlockEntity;
-import org.AL.tutorial.init.ModBlocks;
-import org.AL.tutorial.init.ModCreativeModeTabs;
-import org.AL.tutorial.init.ModItems;
+import org.AL.tutorial.init.*;
 import org.slf4j.Logger;
 
 @Mod(Tutorial.MODID)
@@ -27,6 +24,7 @@ public class Tutorial {
         ModItems.register(modEventBus);
         ModCreativeModeTabs.register(modEventBus);
         ModBlockEntity.register(modEventBus);
+        ModMenuTypes.register(modEventBus);
         //end region
 
         modEventBus.addListener(this::commonSetup);
