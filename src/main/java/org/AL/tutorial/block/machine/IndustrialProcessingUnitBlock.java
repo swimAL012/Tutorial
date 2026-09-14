@@ -3,6 +3,7 @@ package org.AL.tutorial.block.machine;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.datafix.fixes.BlockEntityKeepPacked;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -39,6 +40,21 @@ public class IndustrialProcessingUnitBlock extends HorizontalDirectionalBlock im
         );
     }
 
+    @Override
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+
+
+        if (!(pState.getBlock() == pNewState.getBlock())) {
+            BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
+
+            if (blockEntity instanceof IndustrialProcessingUnitBlockEntity IPU) {
+                IPU.drops();
+            }
+        }
+
+        super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
+    }
+
     @NotNull
     @Override
     public InteractionResult use(@NotNull BlockState pState, Level pLevel, @NotNull BlockPos pPos, @NotNull Player pPlayer, @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit) {
@@ -47,7 +63,7 @@ public class IndustrialProcessingUnitBlock extends HorizontalDirectionalBlock im
             BlockEntity be = pLevel.getBlockEntity(pPos);
             if (be instanceof IndustrialProcessingUnitBlockEntity machine) {
                 NetworkHooks.openScreen((ServerPlayer) pPlayer, machine, pPos);
-            }else {
+            } else {
                 throw new IllegalStateException("Missing Container!");
             }
         }
@@ -68,13 +84,14 @@ public class IndustrialProcessingUnitBlock extends HorizontalDirectionalBlock im
         return new IndustrialProcessingUnitBlockEntity(pPos, pState);
     }
 
+    @Nullable
     @Override
-    public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level pLevel, @NotNull BlockState pState, @NotNull BlockEntityType<T> pBlockEntityType) {
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level pLevel, @NotNull BlockState pState, @NotNull BlockEntityType<T> pBlockEntityType) {
         return pBlockEntityType == ModBlockEntity.INDUSTRIAL_PROCESSING_UNIT_BE.get() ?
                 (lvl, p, st, be) -> ((IndustrialProcessingUnitBlockEntity) be).tick()
                 : null;
     }
-    
+
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
         pBuilder.add(FACING);

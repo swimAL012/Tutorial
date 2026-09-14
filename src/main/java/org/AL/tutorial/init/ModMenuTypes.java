@@ -18,7 +18,7 @@ public class ModMenuTypes {
     //region
     public static final RegistryObject<MenuType<IndustrialProcessingUnitMenu>> INDUSTRIAL_PROCESSING_UNIT_MENU =
             registerMenuType("industrial_processing_unit_menu",IndustrialProcessingUnitMenu::new);
-    //ebdRegion
+    //endRegion
 
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(String name, IContainerFactory<T> factory) {
         return MENUS.register(name, () -> IForgeMenuType.create(factory));

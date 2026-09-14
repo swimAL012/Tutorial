@@ -15,11 +15,17 @@ public class IndustrialProcessingUnitScreen extends AbstractContainerScreen<Indu
 
     private static final ResourceLocation GUI = new ResourceLocation(Tutorial.MODID, "textures/container/industrial_processing_unit.png");
 
+
     public IndustrialProcessingUnitScreen(IndustrialProcessingUnitMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
 
         this.imageHeight = 176;
         this.imageWidth = 174;
+    }
+
+    @Override
+    protected void init() {
+        super.init();
     }
 
     @Override
@@ -39,7 +45,11 @@ public class IndustrialProcessingUnitScreen extends AbstractContainerScreen<Indu
 
     @Override
     public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
+
         renderBackground(pGuiGraphics);
+
         super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
+
+        renderTooltip(pGuiGraphics,pMouseX,pMouseY);
     }
 }
